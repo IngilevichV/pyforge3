@@ -1,5 +1,5 @@
 import unittest
-from protein_api import ProteinApi
+from src.protein_api import ProteinApi
 
 
 class TestProteinApi(unittest.IsolatedAsyncioTestCase):

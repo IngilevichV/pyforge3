@@ -29,7 +29,7 @@ class ProteinDB:
         if not database_exists(self.engine.url):
             create_database(self.engine.url)
 
-        self.drop_table(Protein.__table__)  # TODO: remove (added for testing purpose)
+        # self.drop_table(Protein.__table__)  # TODO: remove (added for testing purpose)
         if not inspect(self.engine).has_table(Protein.__tablename__):
             Base.metadata.create_all(self.engine, tables=[Protein.__table__])
 

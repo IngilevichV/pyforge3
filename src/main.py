@@ -9,7 +9,7 @@ compounds = ['ADP', 'ATP', 'STI', 'ZID', 'DPM', 'XP9', '18W', '29P']
 urls = [api_endpoint + c for c in compounds]
 
 if __name__ == '__main__':
-    logging.basicConfig(filename="logs.txt", filemode='a', level=logging.DEBUG)
+    logging.basicConfig(filename="../logs.txt", filemode='a', level=logging.DEBUG)
 
     proteinDBApi = ProteinApi(timeout)
     proteinDBApi.get_data_in_loop(urls)
