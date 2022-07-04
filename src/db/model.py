@@ -5,6 +5,9 @@ Base = declarative_base()
 
 
 class Protein(Base):
+    """
+    A class to represent Protein entity model
+    """
     __tablename__ = 'proteins'
     id = Column('id', Integer, primary_key=True)
     compound = Column('compound', String)

@@ -16,7 +16,15 @@ log = logging.getLogger(__name__)
 
 
 class ProteinDB:
+    """
+    A class to manage data base for protein data
+    """
     def __init__(self, echo=False):
+        """
+        Constructs all the necessary attributes for the ProteinDB object.
+
+        :param echo: defines log level
+        """
         # an Engine, which the Session will use for connection
         self.engine = create_engine(connection, echo=echo)
 
@@ -25,15 +33,17 @@ class ProteinDB:
         log.debug('Initiated Protein db instance')
 
     def create(self):
+        """Create database"""
         Base.metadata.drop_all(self.engine)
         if not database_exists(self.engine.url):
             create_database(self.engine.url)
 
-        # self.drop_table(Protein.__table__)  # TODO: remove (added for testing purpose)
+        # self.drop_table(Protein.__table__)
         if not inspect(self.engine).has_table(Protein.__tablename__):
             Base.metadata.create_all(self.engine, tables=[Protein.__table__])
 
     def insert(self, proteins_data):
+        """Insert data in Protein table"""
         with self.Session() as session:
             for compound in proteins_data:
                 compound_type = list(compound.keys())[0]
@@ -60,19 +70,11 @@ class ProteinDB:
             log.debug('Inserted values to Protein table')
 
     def print(self):
+        """Print Protein table. Output value is truncated to 13 characters if its length is > 13"""
         df = pd.read_sql_table(Protein.__tablename__, con=self.engine)
         df = df.astype(str).applymap(lambda x: x[:10] + '...' if len(x) >= 13 else x)
         print(df.to_markdown())
 
     def drop_table(self, table):
+        """Drop table indicated in arguments"""
         table.drop(self.engine)
-
-
-
-
-
-
-
-
-
-

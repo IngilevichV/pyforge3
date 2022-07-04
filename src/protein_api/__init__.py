@@ -6,12 +6,16 @@ log = logging.getLogger(__name__)
 
 
 class ProteinApi:
+    """
+    A class to represent API for Protein data bank
+    """
     data = []
 
     def __init__(self,  timeout=1):
         self.timeout = timeout
 
     async def get_data(self, url):
+        """Returns data requested by url"""
         if not url:
             log.debug('Provided url is wrong')
             return None
@@ -25,6 +29,7 @@ class ProteinApi:
             raise
 
     def get_data_in_loop(self, urls):
+        """Performs parallel requests to urls provided in arguments"""
         log.debug(f'Start requesting set of data')
         loop = asyncio.get_event_loop()
         tasks = [self.get_data(url) for url in urls]

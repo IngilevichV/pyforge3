@@ -9,7 +9,7 @@ services:
       - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    environment:   # postgres database name and password
+    environment:
       POSTGRES_PASSWORD: qwerty12345
       POSTGRES_DB: postgres
       POSTGRES_USER: admin
